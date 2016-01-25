@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>line-chart</title>
+	<style type="text/css">
+	#demo svg{
+		border: 1px solid #ccc;
+	}
+	#demo path, #demo line,#demo circle, #demo rect ,#demo polygon{
+		fill: none;
+	    stroke: #000;
+	}
+	#demo path.line {
+		stroke: #666;
+	}
+	</style>
+</head>
+<body>
+<div id="demo"></div>
+
+<script type="text/javascript" src="../node_modules/d3/d3.js"></script>
+<script type="text/javascript">
+	var width = 500, height=500, margin=50;
+
+	var svg = d3.select('#demo')
+				.append('svg')
+				.attr('width',width)
+				.attr('height', height);
+	var sinData = d3.range(0,20,0.1).map(function(i){
+			 	return {
+			 		x: i,
+			 		y: Math.sin(i) +5
+			 	}
+			 });
+	var cosData = d3.range(0,20,0.1).map(function(i){
+			 	return {
+			 		x: i,
+			 		y: Math.cos(i) +4
+			 	}
+			 });
+
+	var data =[sinData, cosData];
+
+	var scaleX = d3.scale.linear()
+	 			.domain([0,20])
+	 			.range([0,width -2*margin]);
+	var scaleY = d3.scale.linear()
+	 			.domain([0,7])
+	 			.range([height-2*margin, 0]);
+
+
+	
+	renderAxis();
+	renderChart();
+
+	function renderAxis(){
+		var axisX = d3.svg.axis()
+						.orient('bottom')
+						.scale(scaleX);
+		var axisY = d3.svg.axis()
+						.orient('left')
+						.scale(scaleY);
+		svg.append('g')
+			.attr('transform', 'translate('+ margin+','+ (height - margin) +')')
+			.call(axisX);
+
+		svg.append('g')
+			.attr('transform', 'translate('+margin+','+ margin +')')
+			.call(axisY);
+	}
+	function renderChart(){
+		var linear = d3.svg.line()
+	 				.x(function(d){
+	 					return scaleX(d.x);
+	 				})
+	 				.y(function(d){
+	 					return scaleY(d.y);
+	 				});
+	 
+		svg.append('g')
+			.attr('transform', 'translate('+margin+','+margin+')')
+			.selectAll('path')
+			.data(data)
+			.enter()
+			.append('path')
+			.classed('line', true)
+			.attr('d', function(d){
+				return linear(d);
+			});
+	}
+</script>
+</body>
+</html>

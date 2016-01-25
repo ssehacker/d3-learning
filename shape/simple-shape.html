@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>simple shape</title>
+	<style type="text/css">
+	#demo svg{
+		border: 1px solid #ccc;
+	}
+	#demo path, #demo line,#demo circle, #demo rect ,#demo polygon{
+		fill: none;
+	    stroke: #000;
+	    /*shape-rendering: crispEdges;*/
+	}
+	</style>
+</head>
+<body>
+<div id="demo"></div>
+
+<script type="text/javascript" src="../node_modules/d3/d3.js"></script>
+<script type="text/javascript">
+	 var svg = d3.select('#demo')
+	 			.append('svg')
+	 			.attr('width',800)
+	 			.attr('height', 200);
+	 svg.append('line')
+	 		.attr('x1', 0)
+	 		.attr('y1', 0)
+	 		.attr('x2', 200)
+	 		.attr('y2', 200);
+
+	 svg.append('circle')
+	 		.attr('cx', 300)	//原点的位置
+	 		.attr('cy', 100)
+	 		.attr('r', 100)
+
+	 svg.append('rect')
+	 		.attr('x',400)
+	 		.attr('y',50)
+	 		.attr('width', 200)
+	 		.attr('height', 100);
+
+	 svg.append('polygon')
+	 		.attr('points', '700,0 600,200 800,200');
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>d3 axis demo</title>
+	<style type="text/css">
+		.axis path, .axis line{
+			fill: none;
+		    stroke: #000;
+		    shape-rendering: crispEdges;
+		}
+	</style>
+</head>
+<body>
+<div id="demo1"></div>
+<script type="text/javascript" src="../node_modules/d3/d3.js"></script>
+<script type="text/javascript">
+	var svg = d3.select('#demo1')
+				.append('svg')
+				.attr('width', 500)
+				.attr('height', 500);
+
+// scala -> axis -> call
+	var scaley = d3.scale.linear()
+				.domain([0,400])
+				.range([400, 0]);
+
+	var axisy = d3.svg.axis()
+				.scale(scaley)
+				.orient('left');
+
+	svg.append('g')
+		.classed('axis',true)
+		.attr('transform', 'translate(50,50)')
+		.call(axisy);
+
+	//date
+	var scale2 = d3.time.scale()
+				.domain([Date.now(), new Date('2014-1-1')])
+				.range([0,400]);
+
+	var axis2 = d3.svg.axis()
+				.scale(scale2)
+				.orient('left');
+
+	svg.append('g')
+		.classed('axis',true)
+		.attr('transform', 'translate(250,50)')
+		.call(axis2);
+
+</script>
+</body>
+</html>

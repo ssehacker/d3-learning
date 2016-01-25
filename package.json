@@ -1,0 +1,21 @@
+{
+  "name": "ssehacker",
+  "version": "1.0.0",
+  "description": "demos for learning d3.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "d3-learning"
+  },
+  "dependencies": {
+    "d3": "3.5"
+  },
+  "keywords": [
+    "d3"
+  ],
+  "author": "ssehacker@163.com",
+  "license": "ISC"
+}
