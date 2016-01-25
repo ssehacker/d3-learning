@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>pie-chart</title>
+	<style type="text/css">
+	#demo svg{
+		border: 1px solid #ccc;
+	}
+	.axis-x path, .axis-x line, .axis-y path, .axis-y line{
+		fill: none;
+	    stroke: #000;
+	}
+	</style>
+</head>
+<body>
+<div id="demo"></div>
+
+<script type="text/javascript" src="../node_modules/d3/d3.js"></script>
+<script type="text/javascript">
+	var width = 500, height=500;
+
+	render();
+
+	function render(){
+		var svg = d3.select('#demo').append('svg')
+					.attr('width', width)
+					.attr('height', height);
+
+		var angle = 2*Math.PI ;
+
+		var data = [
+			{startAngle: 0, endAngle: 0.3* angle},
+			{startAngle:0.3*angle, endAngle: 0.8*angle},
+			{startAngle:0.8*angle, endAngle:angle}
+		];
+		console.log(data)
+		var color = d3.scale.category20();
+
+		var arc = d3.svg.arc()
+					.outerRadius(250)
+					.innerRadius(0);
+
+		svg.append('g')
+			.attr('transform', 'translate('+ width/2+','+height/2+')')
+			.selectAll('path.arc')
+				.data(data)
+				.enter()
+				.append('path')
+				.classed('arc',true)
+				.attr('fill', function(d, i){ return color(i); })
+				.attr('d', function(d){ return arc(d)});
+	}
+
+</script>
+</body>
+</html>
